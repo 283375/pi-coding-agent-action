@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   pi-agent:
-    if: github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +26,7 @@ jobs:
 
       - name: Run Pi agent
         id: pi
-        uses: shaftoe/pi-coding-agent-action@develop
+        uses: 283375/pi-coding-agent-action@feat/intermediate-messages-collapse
         with:
           export_session_html: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -35,6 +34,7 @@ jobs:
           model: ${{ vars.MODEL }}
           token: ${{ secrets.API_KEY }}
           thinking_level: ${{ vars.THINKING_LEVEL }}
+          collapse_intermediate_output: true
           diff_ignore_patterns: 'dist/ pnpm-lock.yaml node_modules/'
           prompt: |
             This is a GitHub PR (#${{ github.event.pull_request.number }}) that needs code review. Focus on identifying issues, bugs, security concerns, and improvements. Don't apply any changes yourself, just review and suggest improvements.

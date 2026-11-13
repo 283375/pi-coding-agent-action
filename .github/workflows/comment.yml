@@ -17,8 +17,8 @@ jobs:
   pi-agent:
     uses: ./.github/workflows/pi.yml
     with:
-      allowed_actor: shaftoe
+      allowed_actor: 283375
     secrets:
-      gh_token: ${{ secrets.GH_PAT }} # Has Gists write access
+      gh_token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
       token: ${{ secrets.API_KEY }}
       opengist_token: ${{ secrets.OPENGIST_TOKEN }}
